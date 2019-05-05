@@ -281,28 +281,32 @@ class PickerWidgetState<T> extends State<_PickerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var v = Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        (picker.hideHeader)
-            ? SizedBox()
-            : Container(
-          child: Row(
-            children: _buildHeaderViews(),
+    var v = Container(
+      padding: EdgeInsets.only(top: 30.0),
+      color: Colors.transparent,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          (picker.hideHeader)
+              ? SizedBox()
+              : Container(
+            child: Row(
+              children: _buildHeaderViews(),
+            ),
+            decoration: picker.headerDecoration ?? BoxDecoration(
+              border: Border(
+                  top: BorderSide(color: theme.dividerColor, width: 0.5)),
+              color: picker.headercolor == null
+                  ? theme.bottomAppBarColor
+                  : picker.headercolor,
+            ),
           ),
-          decoration: picker.headerDecoration ?? BoxDecoration(
-            border: Border(
-                top: BorderSide(color: theme.dividerColor, width: 0.5)),
-            color: picker.headercolor == null
-                ? theme.bottomAppBarColor
-                : picker.headercolor,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: _buildViews(),
           ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: _buildViews(),
-        ),
-      ],
+        ],
+      ),
     );
     if (widget.isModal == null || widget.isModal == false)
       return v;
